@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  kmedoids1:
+    image: kmedoids
+    command: dotnet KMedoids.dll ForContainers ${x1} ${x2}
+    volumes:
+      - D:/volume:/app/data
+
+  kmedoids2:
+    image: kmedoids
+    command: dotnet KMedoids.dll ForContainers ${x2} ${x3}
+    volumes:
+       - D:/volume:/app/data
+
+  kmedoids3:
+    image: kmedoids
+    command: dotnet KMedoids.dll ForContainers ${x3} ${x4}
+    volumes:
+      - D:/volume:/app/data
+volumes:
+  my-volume:
+  
+#version: '3'
+#services:
+#  service1:
+#    build: .
+#    command: dotnet run --method-name --param1 value1
+#    volumes:
+#      - my-volume:/app/data
+
+#  service2:
+#    build: .
+#    command: dotnet run --method-name --param2 value2
+#    volumes:
+#      - my-volume:/app/data
+
+#  service3:
+#    build: .
+#    command: dotnet run --method-name --param3 value3
+#    volumes:
+#      - my-volume:/app/data
+
+#volumes:
+#  my-volume:

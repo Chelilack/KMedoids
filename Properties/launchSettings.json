@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "KMedoids": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
