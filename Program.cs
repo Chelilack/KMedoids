@@ -42,7 +42,6 @@ namespace paralelka_try
             int[] M = validMedoidList.OrderBy(x => rnd.Next()).Take(k).ToArray();
             int[] Mnew = new int[k];
             Array.Copy(M, Mnew, k);
-            //Console.WriteLine("M:{0}", string.Join(", ", M));
             Dictionary<int, List<int>> C = new Dictionary<int, List<int>>();
             bool shouldStop = false;
             for (int t = 0; t < tmax && !shouldStop; t++)
@@ -52,8 +51,7 @@ namespace paralelka_try
                 // Обновление медоидов для каждого кластера
                 for (int kappa = 0; kappa < k; kappa++)
                 {
-                    // Итерация по точкам данных внутри кластера и определение новых медоидов
-                    int currentKappa = kappa; // Для захвата правильного значения в лямбда-выражении
+                    int currentKappa = kappa;
                     C[kappa] = Enumerable.Range(0, J.Length)
                                          .Where(i => J[i] == currentKappa)
                                          .ToList();
@@ -84,23 +82,15 @@ namespace paralelka_try
                 // Обновление медоидов для каждого кластера
                 for (int kappa = 0; kappa < k; kappa++)
                 {
-                    // Итерация по точкам данных внутри кластера и определение новых медоидов
-                    int currentKappa = kappa; // Для захвата правильного значения в лямбда-выражении
+                    int currentKappa = kappa;
                     C[kappa] = Enumerable.Range(0, J.Length)
                                          .Where(i => J[i] == currentKappa)
                                          .ToList();
                 }
             }
 
-            // Окончательное обновление ассоциаций кластеров, если это необходимо
-            // ...
-
-            // Возвращение результатов
             return new Tuple<int[], Dictionary<int, List<int>>>(M, C);
         }
-
-        // посчитать диаметр?
-
         public int[] ArgMinParallel(double[,] D, int[] M)
         {
             int rows = D.GetLength(0);
@@ -157,7 +147,6 @@ namespace paralelka_try
         {
             int VertexCount = edges.Max(tuple => tuple.Item1)+1;
             double[,] DistMatrix = new double[VertexCount, VertexCount];
-            // Инициализация матрицы расстояний
             Parallel.For(0, VertexCount, i =>
             {
                 Parallel.For(0, VertexCount, j =>
@@ -223,7 +212,6 @@ namespace paralelka_try
         }
         public double[,] GetSubMatrix(double[,] originalMatrix, List<int> indices)
         {
-            // Подготовка новой матрицы с размерами, соответствующими списку индексов
             int size = indices.Count;
             double[,] subMatrix = new double[size, size];
             for (int i = 0; i < size; i++)
@@ -233,16 +221,13 @@ namespace paralelka_try
                     subMatrix[i, j] = 0;
                 }
             }
-            // Заполнение новой матрицы значениями из исходной матрицы
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
-                    // Индексы в исходной матрице
                     int rowOriginal = indices[i];
                     int colOriginal = indices[j];
 
-                    // Копирование значения в подматрицу
                     subMatrix[i, j] = originalMatrix[rowOriginal, colOriginal];
                 }
             }

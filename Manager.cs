@@ -25,8 +25,6 @@ namespace paralelka_try
             {
                 // Путь к вашему Docker Compose файлу
                 string composeFilePath = @"C:\Users\alesh\source\repos\KMedoids\docker-compose.yml";
-
-                // Значения для переменных x1, x2, x3, x4
                 string x1 = "0";
                 string x2 = "20"; // k/3
                 string x3 = "40"; // (k/3)*2
@@ -59,10 +57,8 @@ namespace paralelka_try
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
 
-                    // Ожидание завершения процесса
                     process.WaitForExit();
 
-                    // Проверка результата
                     if (process.ExitCode == 0)
                     {
                         Console.WriteLine($"Docker Compose started successfully with parameters: {x1}, {x2}, {x3}, {x4}");
@@ -75,10 +71,8 @@ namespace paralelka_try
 
                 string directoryPath = @"D:/volume";
 
-                // Получение всех CSV-файлов из каталога
                 var csvFiles = Directory.GetFiles(directoryPath, "*.csv");
 
-                //List<Tuple<int[], Dictionary<int, List<int>>>> results = new List<Tuple<int[], Dictionary<int, List<int>>>>();
                 Dictionary<int, Tuple<int[], Dictionary<int, List<int>>>> results = new Dictionary<int, Tuple<int[], Dictionary<int, List<int>>>>();
                 List<int> medoidIndices = new List<int>();
                 // Чтение каждого CSV-файла
@@ -97,8 +91,6 @@ namespace paralelka_try
                             }
                             else if (line.StartsWith("Cluster Associations:"))
                             {
-                                // Здесь вы можете добавить  логику для обработки ассоциаций кластеров
-                                // Например, если следующие строки содержат ассоциации кластеров
                                 var clusterAssociations = new Dictionary<int, List<int>>();
                                 for (int i = 2; i < lines.Length; i++)
                                 {
@@ -132,7 +124,6 @@ namespace paralelka_try
                     Console.WriteLine("-----------------------");
                 }
                 string filePath = @"C:/Users/alesh/source/repos/KMedoids/out.csv";
-                //List<Tuple<int, int, double>> data = ReadExcelData(filePath);
                 List<Tuple<int, int, double>> data = agent.ReadCsvData(filePath);
                 ConcurrentDictionary<int, double> metricResult = new ConcurrentDictionary<int, double>();
                 double[,] D = kMedoids.CalculateDistanceMatrix(data, false);

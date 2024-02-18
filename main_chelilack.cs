@@ -90,33 +90,20 @@ namespace paralelka_try
             {
                 Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
             }
-            // Tuple<int[], Dictionary<int, List<int>>> result = kMagent.PerformKMedoids(D, 4, 100);
 
             var result = results[metric.OrderBy(entry => entry.Value).FirstOrDefault().Key];
-            ///////////////////////////////////////////////////
+
             string containerId = Environment.GetEnvironmentVariable("HOSTNAME");
-
-            // Создаем уникальное имя файла, используя идентификатор контейнера
             string fileName = $"result_{containerId}.csv";
-
-            // Записываем результаты в файл
             using (var writer = new StreamWriter($"/app/data/{fileName}", false)) 
             {
-
-                // Записываем индексы медиоидов
                 writer.WriteLine("Medoid Indices: " + string.Join(", ", result.Item1));
-
-                // Записываем ассоциации кластеров
                 writer.WriteLine("Cluster Associations:");
                 foreach (var kvp in result.Item2)
                 {
                     writer.WriteLine($"Cluster {kvp.Key}: {string.Join(", ", kvp.Value)}");
                 }
             }
-
-
-            ////////////////////////////////////////////////////
-                // выбрать min из metric -> соотнести по k с results
 
             Console.WriteLine("Medoid Indices: {0}", string.Join(", ", result.Item1));
             Console.WriteLine("Cluster Associations:");
@@ -139,8 +126,6 @@ namespace paralelka_try
                 Console.WriteLine();
             }
         }
-    
-        
 
         public List<Tuple<int, int, double>> ReadCsvData(string filePath)
         {

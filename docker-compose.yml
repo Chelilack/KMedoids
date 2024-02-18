@@ -20,26 +20,3 @@ services:
       - D:/volume:/app/data
 volumes:
   my-volume:
-  
-#version: '3'
-#services:
-#  service1:
-#    build: .
-#    command: dotnet run --method-name --param1 value1
-#    volumes:
-#      - my-volume:/app/data
-
-#  service2:
-#    build: .
-#    command: dotnet run --method-name --param2 value2
-#    volumes:
-#      - my-volume:/app/data
-
-#  service3:
-#    build: .
-#    command: dotnet run --method-name --param3 value3
-#    volumes:
-#      - my-volume:/app/data
-
-#volumes:
-#  my-volume:
